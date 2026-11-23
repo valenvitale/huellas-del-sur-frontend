@@ -1,0 +1,19 @@
+.refugios-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 32px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+}
+
+.pagination-info {
+    background-color: #f2f4ef;
+    color: #294638;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+}
