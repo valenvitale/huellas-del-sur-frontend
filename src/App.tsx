@@ -3,6 +3,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import PageContainer from "./components/layout/PageContainer";
 import Home from "./pages/Home";
+import Refugios from "./pages/Refugios";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <PageContainer>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/refugios" element={<Refugios />} />
           </Routes>
         </PageContainer>
 
