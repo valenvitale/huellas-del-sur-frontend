@@ -6,6 +6,11 @@ import Home from "./pages/Home";
 import Refugios from "./pages/Refugios";
 import RefugioDetalle from "./pages/RefugioDetalle";
 import FormularioRefugio from "./components/refugios/FormularioRefugio";
+import Login from "./pages/Login";
+import Registro from "./pages/Registro";
+import RecuperarPassword from "./pages/RecuperarPassword";
+import Perfil from "./pages/Perfil";
+import Animales from "./pages/Animales";
 
 function App() {
   return (
@@ -23,9 +28,17 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/refugios" element={<Refugios />} />
-            <Route path="/refugios/:id" element={<RefugioDetalle/>}/>
+            <Route path="/refugios/:id" element={<RefugioDetalle />} />
             <Route path="/refugios/nuevo" element={<FormularioRefugio />} />
             <Route path="/refugios/:id/editar" element={<FormularioRefugio />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route
+                path="/recuperar-password"
+                element={<RecuperarPassword />}
+            />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/animales" element={<Animales />} />
           </Routes>
         </PageContainer>
 
