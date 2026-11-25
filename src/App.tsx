@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import RecuperarPassword from "./pages/RecuperarPassword";
 import Perfil from "./pages/Perfil";
+import Animales from "./pages/Animales";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                 element={<RecuperarPassword />}
             />
             <Route path="/perfil" element={<Perfil />} />
+            <Route path="/animales" element={<Animales />} />
           </Routes>
         </PageContainer>
 
