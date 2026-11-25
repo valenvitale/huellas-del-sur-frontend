@@ -1,13 +1,13 @@
-    export interface Refugio {
-        id: string;
-        nombre: string;
-        direccion: string;
-        localidad: string;
-        telefono: string;
-        descripcion: string;
-        estado: "activo" | "inactivo";
-        email?: string;
-    }
+export interface Refugio {
+    id: string;
+    nombre: string;
+    direccion: string;
+    localidad: string;
+    telefono: string;
+    descripcion: string;
+    estado: "activo" | "inactivo";
+    email?: string;
+}
 
 export interface Pagination {
     page: number;
