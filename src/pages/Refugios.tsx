@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { obtenerRefugios } from "../services/refugiosService";
 import type { Refugio } from "../types/Refugio";
 import Card from "../components/ui/Card";
@@ -15,7 +16,8 @@ export default function Refugios() {
     const [totalRefugios, setTotalRefugios] = useState(0);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [refugioSeleccionado, setRefugioSeleccionado] = useState<Refugio | null>(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         let activo = true;
@@ -49,31 +51,40 @@ export default function Refugios() {
 
     return (
         <section>
-            <h1>Refugios</h1>
+            <div className="refugios-header">
+                <div>
+                    <h1>Refugios</h1>
+                    <p>Conocé los refugios de nuestra comunidad.</p>
+                </div>
 
-            <Input
-                label="Buscar refugio"
-                placeholder="Ingresá el nombre del refugio"
-                value={busqueda}
-                onChange={(e) => {
-                    setCargando(true);
-                    setBusqueda(e.target.value);
-                    setPagina(1);
-                    setRefugioSeleccionado(null);
-                }}
-            />
+                <Button onClick={() => navigate("/refugios/nuevo")}>
+                    + Nuevo refugio
+                </Button>
+            </div>
 
-            <Input
-                label="Filtrar por localidad"
-                placeholder="Ej.: Bahía Blanca"
-                value={localidad}
-                onChange={(e) => {
-                    setCargando(true);
-                    setLocalidad(e.target.value);
-                    setPagina(1);
-                    setRefugioSeleccionado(null);
-                }}
-            />
+            <div className="refugios-filtros">
+                <Input
+                    label="Buscar por nombre"
+                    placeholder="Ingresá el nombre del refugio"
+                    value={busqueda}
+                    onChange={(e) => {
+                        setCargando(true);
+                        setBusqueda(e.target.value);
+                        setPagina(1);
+                    }}
+                />
+
+                <Input
+                    label="Localidad"
+                    placeholder="Ej.: Bahía Blanca"
+                    value={localidad}
+                    onChange={(e) => {
+                        setCargando(true);
+                        setLocalidad(e.target.value);
+                        setPagina(1);
+                    }}
+                />
+            </div>
 
             <p>Total de refugios encontrados: {totalRefugios}</p>
 
@@ -87,40 +98,27 @@ export default function Refugios() {
                 <p>No se encontraron refugios con los filtros seleccionados.</p>
             )}
 
-            {!cargando && !error && refugios.map((refugio) => (
-                <Card key={refugio.id}>
-                    <h2>{refugio.nombre}</h2>
-                    <p>Localidad: {refugio.localidad}</p>
-                    <p>Estado: {refugio.estado}</p>
+            <div className="refugios-grid">
+                {!cargando && !error && refugios.map((refugio) => (
+                    <Card key={refugio.id}>
+                        <h2>{refugio.nombre}</h2>
 
-                    {refugioSeleccionado?.id === refugio.id && (
-                        <div className="refugio-detalles">
-                            <p>Dirección: {refugio.direccion}</p>
-                            <p>Teléfono: {refugio.telefono}</p>
+                        <p>Localidad: {refugio.localidad}</p>
 
-                            {refugio.email && (
-                                <p>Email: {refugio.email}</p>
-                            )}
+                        <span className={`estado-${refugio.estado}`}>
+                            {refugio.estado === "activo" ? "Activo" : "Inactivo"}
+                        </span>
 
-                            <p>Descripción: {refugio.descripcion}</p>
-                        </div>
-                    )}
+                        <p>{refugio.descripcion}</p>
 
-                    <Button
-                        onClick={() =>
-                            setRefugioSeleccionado(
-                                refugioSeleccionado?.id === refugio.id
-                                    ? null
-                                    : refugio
-                            )
-                        }
-                    >
-                        {refugioSeleccionado?.id === refugio.id
-                            ? "Cerrar detalles"
-                            : "Ver detalles"}
-                    </Button>
-                </Card>
-            ))}
+                        <Button
+                            onClick={() => navigate(`/refugios/${refugio.id}`)}
+                        >
+                            Ver detalles →
+                        </Button>
+                    </Card>
+                ))}
+            </div>
 
             {!cargando && !error && totalRefugios > 0 && (
                 <div className="refugios-pagination">
@@ -128,7 +126,6 @@ export default function Refugios() {
                         onClick={() => {
                             setCargando(true);
                             setPagina(pagina - 1);
-                            setRefugioSeleccionado(null);
                         }}
                         disabled={pagina === 1}
                     >
@@ -143,7 +140,6 @@ export default function Refugios() {
                         onClick={() => {
                             setCargando(true);
                             setPagina(pagina + 1);
-                            setRefugioSeleccionado(null);
                         }}
                         disabled={pagina >= totalPaginas}
                     >

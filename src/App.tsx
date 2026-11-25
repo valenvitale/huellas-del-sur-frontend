@@ -4,6 +4,8 @@ import Footer from "./components/layout/Footer";
 import PageContainer from "./components/layout/PageContainer";
 import Home from "./pages/Home";
 import Refugios from "./pages/Refugios";
+import RefugioDetalle from "./pages/RefugioDetalle";
+import FormularioRefugio from "./components/refugios/FormularioRefugio";
 import Login from "./pages/Login";
 import Registro from "./pages/Registro";
 import RecuperarPassword from "./pages/RecuperarPassword";
@@ -26,6 +28,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/refugios" element={<Refugios />} />
+            <Route path="/refugios/:id" element={<RefugioDetalle />} />
+            <Route path="/refugios/nuevo" element={<FormularioRefugio />} />
+            <Route path="/refugios/:id/editar" element={<FormularioRefugio />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
             <Route

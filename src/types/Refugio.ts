@@ -24,3 +24,19 @@ export interface RefugiosResponse {
         pagination: Pagination;
     };
 }
+
+export type RefugioInput = Omit<Refugio, "id">;
+
+export interface RefugioResponse {
+    msg: string;
+    code: number;
+    data: {
+        refugio: Refugio;
+    };
+}
+
+export interface EliminarRefugioResponse {
+    msg: string;
+    code: number;
+    data: unknown;
+}
